@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { Appbar } from "@/components/Appbar";
 import { Balance } from "@/components/Balance";
 import Users from "@/components/Users";
-import Loader from "@/components/Loader"; // Import your Loader component
 import PageLoader from "@/components/PageLoader";
 
 export default function Dashboard() {
@@ -29,7 +28,6 @@ export default function Dashboard() {
       {isLoading ? <PageLoader /> : null}
       <div>
         <Appbar />
-
         <div className="m-8">
           <Balance value={balance} />
           <Users handleBalance={handleBalance} setLoading={setIsLoading} />

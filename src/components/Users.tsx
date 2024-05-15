@@ -3,6 +3,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Button } from "./Button";
 import Loader from "./Loader";
+import debounce from "lodash/debounce";
 
 interface userProps {
   handleBalance?: (balance: string) => void;
@@ -13,6 +14,14 @@ const Users: React.FC<userProps> = ({ handleBalance, setLoading }) => {
   const [users, setUsers] = useState([]);
   const [filter, setFilter] = useState("");
   const router = useRouter();
+
+  const debouncedHandleFilterChange = debounce((value: string) => {
+    setFilter(value);
+  }, 300);
+
+  const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    debouncedHandleFilterChange(e.target.value);
+  };
 
   useEffect(() => {
     console.log(users);
@@ -42,10 +51,6 @@ const Users: React.FC<userProps> = ({ handleBalance, setLoading }) => {
 
     fetchData();
   }, [filter]);
-
-  const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFilter(e.target.value);
-  };
 
   const handleSendMoney = (userId: string, userName: string) => {
     router.push(`/sendMoney?id=${userId}&name=${userName}`);
