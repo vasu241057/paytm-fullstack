@@ -2,9 +2,33 @@
 
 import { useSearchParams } from "next/navigation";
 import axios from "axios";
-import { useState } from "react";
+import { useState, Suspense, useEffect } from "react";
+import PageLoader from "@/components/PageLoader";
 
-const SendMoney = () => {
+export default function SendMoney() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false); // Hide the loader after 1 second
+    }, 1000);
+
+    return () => {
+      clearTimeout(timer); // Clean up the timer on unmount
+    };
+  }, []);
+
+  return (
+    <>
+      {isLoading ? <PageLoader /> : null}
+      <Suspense fallback={<div>Loading...</div>}>
+        <Send />
+      </Suspense>
+    </>
+  );
+}
+
+const Send = () => {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
   const name = searchParams.get("name");
@@ -13,7 +37,7 @@ const SendMoney = () => {
   const handleTransfer = async () => {
     try {
       await axios.post(
-        "http://localhost:3000/api/v1/account/transfer",
+        "https://stingray-app-lnpgp.ondigitalocean.app/api/v1/account/transfer",
         {
           to: id,
           amount,
@@ -74,5 +98,3 @@ const SendMoney = () => {
     </div>
   );
 };
-
-export default SendMoney;

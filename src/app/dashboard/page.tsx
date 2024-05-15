@@ -4,25 +4,37 @@ import { Appbar } from "@/components/Appbar";
 import { Balance } from "@/components/Balance";
 import Users from "@/components/Users";
 import Loader from "@/components/Loader"; // Import your Loader component
+import PageLoader from "@/components/PageLoader";
 
-const Dashboard = () => {
+export default function Dashboard() {
   const [balance, setBalance] = useState("");
   const [isLoading, setIsLoading] = useState(true); // State to track loading
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false); // Hide the loader after 1 second
+    }, 1000);
+
+    return () => {
+      clearTimeout(timer); // Clean up the timer on unmount
+    };
+  }, []);
 
   const handleBalance = (balance: string) => {
     setBalance(balance);
   };
 
   return (
-    <div>
-      <Appbar />
+    <>
+      {isLoading ? <PageLoader /> : null}
+      <div>
+        <Appbar />
 
-      <div className="m-8">
-        <Balance value={balance} />
-        <Users handleBalance={handleBalance} setLoading={setIsLoading} />
+        <div className="m-8">
+          <Balance value={balance} />
+          <Users handleBalance={handleBalance} setLoading={setIsLoading} />
+        </div>
       </div>
-    </div>
+    </>
   );
-};
-
-export default Dashboard;
+}
