@@ -4,6 +4,9 @@ import { useSearchParams } from "next/navigation";
 import axios from "axios";
 import { useState, Suspense, useEffect } from "react";
 import PageLoader from "@/components/PageLoader";
+import { ToastContainer } from "react-toastify";
+import { SuccessToast } from "@/components/SuccessToast";
+import { useRouter } from "next/navigation";
 
 export default function SendMoney() {
   const [isLoading, setIsLoading] = useState(true);
@@ -33,6 +36,7 @@ const Send = () => {
   const id = searchParams.get("id");
   const name = searchParams.get("name");
   const [amount, setAmount] = useState<number>(0);
+  const router = useRouter();
 
   const handleTransfer = async () => {
     try {
@@ -48,6 +52,10 @@ const Send = () => {
           },
         }
       );
+      SuccessToast("Transaction successful");
+      setTimeout(() => {
+        router.replace(`/dashboard`);
+      }, 2000);
     } catch (error) {
       console.error("Error initiating transfer:", error);
     }
@@ -91,6 +99,7 @@ const Send = () => {
               >
                 Initiate Transfer
               </button>
+              <ToastContainer />
             </div>
           </div>
         </div>

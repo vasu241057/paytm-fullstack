@@ -20,7 +20,8 @@ export default function Dashboard() {
   }, []);
 
   const handleBalance = (balance: string) => {
-    setBalance(balance);
+    const trimmedBalance = parseFloat(balance).toFixed(2);
+    setBalance(trimmedBalance);
   };
 
   return (
