@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import Loader2 from "@/components/Loader2";
 import { Bounce, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Analytics } from "@vercel/analytics/react";
 
 export default function Home() {
   const router = useRouter();

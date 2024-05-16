@@ -12,6 +12,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.2.2",
     "axios": "^1.6.8",
     "lodash": "^4.17.21",
     "next": "14.2.3",
