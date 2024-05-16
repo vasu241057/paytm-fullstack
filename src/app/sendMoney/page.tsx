@@ -13,11 +13,11 @@ export default function SendMoney() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setIsLoading(false); // Hide the loader after 1 second
+      setIsLoading(false);
     }, 1000);
 
     return () => {
-      clearTimeout(timer); // Clean up the timer on unmount
+      clearTimeout(timer);
     };
   }, []);
 
