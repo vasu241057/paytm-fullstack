@@ -9,8 +9,10 @@ import SubHeading from "@/components/SubHeading";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import PageLoader from "@/components/PageLoader";
-import Toast from "@/components/WarningToast";
+import { WarnToast } from "@/components/WarningToast";
 import { Bounce, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { z } from "zod";
 
 export default function Signup() {
   const [firstName, setFirstName] = useState("");
@@ -19,6 +21,13 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
+
+  const userSchema = z.object({
+    username: z.string().email().min(3).max(255).trim(),
+    password: z.string().min(6).max(20).trim(),
+    firstName: z.string().trim(),
+    lastName: z.string().trim(),
+  });
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -29,6 +38,37 @@ export default function Signup() {
       clearTimeout(timer); // Clean up the timer on unmount
     };
   }, []);
+
+  const onclickHandler = async () => {
+    const { success, error } = userSchema.safeParse({
+      username,
+      password,
+      firstName,
+      lastName,
+    });
+    if (!success) {
+      const field = error.issues[0].path[0];
+      const errorMessage = error.issues[0].message;
+      WarnToast(`${field}: ${errorMessage}`);
+      return;
+    }
+    try {
+      const response = await axios.post(
+        "https://stingray-app-lnpgp.ondigitalocean.app/api/v1/user/signup",
+        {
+          username,
+          firstName,
+          lastName,
+          password,
+        }
+      );
+      localStorage.setItem("token", response.data.token);
+      router.push("/dashboard");
+    } catch (error) {
+      console.error("Error during signup:", error);
+      // Handle error, e.g., show an error message to the user
+    }
+  };
 
   return (
     <>
@@ -67,49 +107,14 @@ export default function Signup() {
               label={"Password"}
             />
             <div className="pt-4">
-              <Button
-                onClick={async () => {
-                  if (password.length < 6) {
-                    toast.warn("🦄 Wow so easy!", {
-                      position: "top-right",
-                      autoClose: 5000,
-                      hideProgressBar: false,
-                      closeOnClick: true,
-                      pauseOnHover: true,
-                      draggable: true,
-                      progress: undefined,
-                      theme: "light",
-                      transition: Bounce,
-                    });
-
-                    console.log("yoyo");
-                    return;
-                  }
-                  try {
-                    const response = await axios.post(
-                      "https://stingray-app-lnpgp.ondigitalocean.app/api/v1/user/signup",
-                      {
-                        username,
-                        firstName,
-                        lastName,
-                        password,
-                      }
-                    );
-                    localStorage.setItem("token", response.data.token);
-                    router.push("/dashboard");
-                  } catch (error) {
-                    console.error("Error during signup:", error);
-                    // Handle error, e.g., show an error message to the user
-                  }
-                }}
-                label="Sign up"
-              />
+              <Button onClick={onclickHandler} label="Sign up" />
             </div>
             <BottomWarning
               label={"Already have an account?"}
               buttonText={"Sign in"}
               to={"/signin"}
             />
+            <ToastContainer />
           </div>
         </div>
       </div>
