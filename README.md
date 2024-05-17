@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Paytm Clone - Front-End and Back-End
 
-## Getting Started
+[![Hosted on Vercel](https://img.shields.io/badge/Hosted%20on-Vercel-blue?logo=vercel)](https://paytm-front-end.vercel.app/)
 
-First, run the development server:
+This project is a simplified front-end and back-end implementation of Paytm, a popular digital payments platform in India.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Live Demo
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Experience the Paytm Clone at: https://paytm-front-end.vercel.app/
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+* **frontend:** Contains the Next.js-based front-end application.
+* **backend:** Houses the Express.js back-end server.
 
-## Learn More
+## Technologies Used
 
-To learn more about Next.js, take a look at the following resources:
+### Front-End (frontend)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+* **Next.js:** A React framework for building modern web applications.
+* **Tailwind CSS:** A utility-first CSS framework for rapid UI development.
+* **Axios:** A promise-based HTTP client for API requests.
+* **React Toastify:** A library for displaying toast notifications.
+* **Zod:** A TypeScript-first schema validation library.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Back-End (backend)
 
-## Deploy on Vercel
+* **Express.js:** A minimal and flexible web application framework for Node.js.
+* **Mongoose:** An elegant MongoDB object modeling for Node.js.
+* **JSON Web Token (JWT):** A standard for securely transmitting information between parties as a JSON object.
+* **Zod:** A TypeScript-first schema validation library.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Installation and Setup
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Prerequisites
+
+* Node.js and npm (or yarn) installed
+* MongoDB running locally or a MongoDB Atlas account
+
+### Steps
+
+1. **Clone the Repository:**
+
+   ```bash
+   git clone repo-link
+
+
+2. **Install Dependencies:**
+
+   ```bash
+   cd frontend
+   npm install
+
+   cd ../backend
+   npm install   
+
+3. **Set up environment variables:**
+
+   # backend/.env
+
+   ```bash
+    MONGODB_URI=<your_mongodb_connection_string>
+    JWT_SECRET=<your_jwt_secret_key>
