@@ -6,7 +6,7 @@ This project is a simplified front-end and back-end implementation of Paytm, a p
 
 ## Live Demo
 
-Experience the Paytm Clone at: https://paytm-front-end.vercel.app/
+Experience the Paytm Clone at: [https://paytm-front-end.vercel.app/](https://paytm-vasu.vercel.app/)
 
 ## Project Structure
 
