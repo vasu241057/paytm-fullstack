@@ -50,7 +50,7 @@ export default function Signin() {
 
     try {
       const response = await axios.post(
-        "https://stingray-app-lnpgp.ondigitalocean.app/api/v1/user/signin",
+        "https://paytm-backend-uyb3.onrender.com/api/v1/user/signin",
         { username, password }
       );
 

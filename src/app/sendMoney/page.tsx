@@ -41,7 +41,7 @@ const Send = () => {
   const handleTransfer = async () => {
     try {
       await axios.post(
-        "https://stingray-app-lnpgp.ondigitalocean.app/api/v1/account/transfer",
+        "https://paytm-backend-uyb3.onrender.com/api/v1/account/transfer",
         {
           to: id,
           amount,
