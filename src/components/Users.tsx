@@ -28,7 +28,7 @@ const Users: React.FC<userProps> = ({ handleBalance, setLoading }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://stingray-app-lnpgp.ondigitalocean.app/api/v1/user/bulk?filter=" +
+          "https://paytm-backend-uyb3.onrender.com/api/v1/user/bulk?filter=" +
             filter,
           {
             headers: {
